@@ -16,21 +16,19 @@ tb = Text(height=3)
 
 def age():
     tb.delete('1.0', END)
-    try:
-        day = int(daye.get())
-        month = int(monthe.get())
-        year = int(yeare.get())
-        birth_date = datetime(year, month, day)
-        today = datetime.now()
+    day = int(daye.get())
+    month = int(monthe.get())
+    year = int(yeare.get())
+    birth_date = datetime(year, month, day)
+    today = datetime.now()
 
-        age_years = today.year - birth_date.year
-        if (today.month, today.day) < (birth_date.month, birth_date.day):
+    age_years = today.year - birth_date.year
+    if (today.month, today.day) < (birth_date.month, birth_date.day):
             age_years -= 1
-
-        tb.insert(END, f"You are {age_years} years old.")
-    except ValueError:
-        tb.insert(END, "Invalid date input. Please enter valid numbers.")
-
+    if age_years < 0 or age_years == 0:
+                tb.insert(END, f"You are not born.")
+    else:
+                tb.insert(END, f"You are {age_years} years old.")
 dayl.pack()
 daye.pack()
 monthl.pack()
